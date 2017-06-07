@@ -7,7 +7,7 @@ class App extends React.Component {
 
   constructor() {
     super();
-    
+
     this.state = {
       latestTweets: []
     };
@@ -28,6 +28,22 @@ class App extends React.Component {
     this.setState({
       latestTweets: newTweets
     });
+  }
+
+  componentWillMount(){
+    this.fetchTweets()
+  }
+
+  componentDidMount(){
+    this.startInterval()
+  }
+
+  componentWillUnmount(){
+    this.cleanUpInterval()
+  }
+
+  shouldComponentUpdate(){
+    return (this.state.latestTweets.length > 0)
   }
 
   render() {
